@@ -10,7 +10,8 @@ import { FormsModule} from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule} from '@angular/common/http'
+import { HttpClientModule} from '@angular/common/http';
+import { Network } from '@ionic-native/network/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { HttpClientModule} from '@angular/common/http'
     HttpClientModule,FormsModule],
   providers: [
     StatusBar,
+    Network,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
