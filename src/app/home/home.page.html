@@ -7,15 +7,17 @@
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
-  <ion-button (click)="getData()">Click me</ion-button>
-  <ion-searchbar [(ngModel)]="searchTerm"></ion-searchbar>
-  <div>
-    <h1 *ngFor="let item of data">
-      {{item.author.raw}}
-    </h1>
-  </div>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="getData()" debounce="500"></ion-searchbar>
+  
+  <ion-card *ngFor = "let item of data ">
+    <ion-card-header>
+      <ion-card-subtitle>{{item.repository.name}}</ion-card-subtitle>
+      <ion-card-title>{{item.author.raw}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <h3>{{item.date}}</h3>
+      <p> Message: <strong>{{item.message}}</strong></p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
