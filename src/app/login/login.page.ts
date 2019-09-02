@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Events, Platform, ToastController } from '@ionic/angular';
 import { Network } from '@ionic-native/network/ngx';
 import {HttpClient,HttpHeaders} from '@angular/common/http'
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ export class LoginPage implements OnInit {
     private plt: Platform,
     private router: Router,
     private toastCtrl: ToastController,
-    private http:HttpClient
+    private http: HttpClient,
+    private navCtrl: NavController
   ) { }
 
   ngOnInit() {
@@ -48,15 +50,16 @@ export class LoginPage implements OnInit {
     }
     this.userDidLogin = true;
     this.loginProcessLoading = true;
-    const url = `https://api.bitbucket.org/2.0/repositories/ExplodingCow_apu/${this.searchTerm}/commits/`
-    console.log(this.searchTerm)
-    let Httpheaders = new HttpHeaders()
-    Httpheaders.append('username', this.apkey);
-    Httpheaders.append('password', this.password);
-    this.http.get(url,{headers:Httpheaders}).subscribe(resp=>{
-      this.data = resp["values"]
-      console.log(this.data)
-    })
+    this.navCtrl.navigateForward(`/home/${this.apkey}`)
+    // const url = `https://api.bitbucket.org/2.0/repositories/ExplodingCow_apu/${this.searchTerm}/commits/`
+    // console.log(this.searchTerm)
+    // let Httpheaders = new HttpHeaders()
+    // Httpheaders.append('username', this.apkey);
+    // Httpheaders.append('password', this.password);
+    // this.http.get(url,{headers:Httpheaders}).subscribe(resp=>{
+    //   this.data = resp["values"]
+    //   console.log(this.data)
+    // })
     // this.cas.getTGT(this.apkey, this.password).pipe(
     //   catchError(e => (this.toast(e), EMPTY)),
     //   switchMap(tgt => this.cas.getST(this.cas.casUrl, tgt)),

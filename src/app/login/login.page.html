@@ -57,9 +57,6 @@
   <ion-grid no-padding>
     <!-- Logo -->
     <ion-row header align-items-start align-items-stretch>
-      <ion-col size="10" offset="1" size-md="6" offset-md="3" size-lg="4" offset-lg="4">
-        <img logo src="assets/img/login.jpg" />
-      </ion-col>
 
       <!-- Form & Welcome Message -->
       <ion-col size="10" offset="1" size-md="6" offset-md="3" size-lg="4" offset-lg="4">
@@ -88,7 +85,7 @@
               </div>
               <!-- Login Button -->
               <ion-col size="12" no-padding>
-                <ion-button class="login-button" no-margin expand="block" type="submit">
+                <ion-button class="login-button" no-margin expand="block" type="submit" routerDirection="forward">
                   <span *ngIf="!userDidLogin">LOGIN</span>
                   <!-- LOADING -->
                   <ion-icon *ngIf="!userDidLogin" name="log-in" slot="end" size="large"></ion-icon>

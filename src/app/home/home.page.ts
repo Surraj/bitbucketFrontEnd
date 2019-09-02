@@ -1,19 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { HttpClient,HttpHeaders} from '@angular/common/http'
 import { map } from 'rxjs/operators'
+import {NavParams} from '@ionic/angular'
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
-  username = "TP050803@mail.apu.edu.my"
-  password = "surraj34"
+export class HomePage implements OnInit{
+  username;
+  password;
   searchTerm
   data;
-  constructor(private alertCtrl: AlertController, private http: HttpClient) {}
+  constructor(private alertCtrl: AlertController, 
+              private http: HttpClient,
+              private route:ActivatedRoute) {}
+  
+  ngOnInit(){
+   this.username= this.route.snapshot.paramMap.get('username')
 
+   console.log(this.username)
+  }
 
   async presentAlert() {
     const alert = await this.alertCtrl.create({
@@ -27,11 +37,11 @@ export class HomePage {
   }
 
   getData(){
-    const url = `https://api.bitbucket.org/2.0/repositories/ExplodingCow_apu/${this.searchTerm}/commits/`
+    const url = `https://api.bitbucket.org/2.0/repositories/${this.username}/${this.searchTerm}/commits/`
     console.log(this.searchTerm)
     let Httpheaders = new HttpHeaders()
     Httpheaders.append('username', this.username);
-    Httpheaders.append('password', this.password);
+    
     this.http.get(url,{headers:Httpheaders}).subscribe(resp=>{
       this.data = resp["values"]
       console.log(this.data)
