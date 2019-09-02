@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Events, Platform, ToastController } from '@ionic/angular';
+import { Events, Platform, ToastController, LoadingController } from '@ionic/angular';
 import { Network } from '@ionic-native/network/ngx';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import {HttpClient,HttpHeaders} from '@angular/common/http'
 import { NavController } from '@ionic/angular';
 
@@ -13,7 +14,7 @@ import { NavController } from '@ionic/angular';
 export class LoginPage implements OnInit {
 
   apkey: string;
-  password: string;
+  password;
   showPassword: boolean;
 
   // LOGIN BUTTON ANIMATIONS ITEMS
@@ -30,10 +31,12 @@ export class LoginPage implements OnInit {
     private router: Router,
     private toastCtrl: ToastController,
     private http: HttpClient,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    public loadingCtrl: LoadingController,
   ) { }
 
   ngOnInit() {
+
   }
 
   toast(message: string) {
@@ -48,6 +51,7 @@ export class LoginPage implements OnInit {
     if (this.plt.is('cordova') && this.network.type === 'none') {
       return this.toast('You are now offline.');
     }
+    console.log(this.password)
     this.userDidLogin = true;
     this.loginProcessLoading = true;
     this.navCtrl.navigateForward(`/home/${this.apkey}`)
@@ -86,5 +90,6 @@ export class LoginPage implements OnInit {
     // );
   }
 
+  
 
 }

@@ -63,8 +63,7 @@
         <form (ngSubmit)="onLoginClicked()" #loginForm="ngForm" no-padding>
           <ion-row align-items-start>
             <ion-col class="title-text-wrapper" size="12">
-              <h1><strong>APSpace,</strong></h1>
-              <h2>Your digital university companion</h2>
+              <h1><strong>Bitbucket Commits,</strong></h1>
               
             </ion-col>
           </ion-row>
@@ -81,7 +80,7 @@
                 <ion-item no-padding>
                   <ion-input padding-start type="password" [placeholder]="'Password'" [(ngModel)]="password" (keyup.enter)="onLoginClicked()"
                     [required]="true" name="password"></ion-input>
-                </ion-item>
+ */               </ion-item>-/
               </div>
               <!-- Login Button -->
               <ion-col size="12" no-padding>
@@ -96,6 +95,7 @@
                   <span *ngIf="userDidLogin && userAuthenticated">
                     <ion-icon name="happy" slot="end" size="large"></ion-icon>
                   </span>
+                  
                   <!-- USER ENTER INVALID CREDENTIALS -->
                   <span *ngIf="userDidLogin && userUnauthenticated">
                     <ion-icon name="sad" slot="end" size="large"></ion-icon>

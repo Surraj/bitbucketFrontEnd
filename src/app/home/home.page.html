@@ -7,6 +7,7 @@
 </ion-header>
 
 <ion-content>
+    <ion-button (click)="presentModal3()">Click</ion-button>
   <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="getData()" debounce="500"></ion-searchbar>
   
   <ion-card *ngFor = "let item of data ">
