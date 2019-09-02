@@ -30,16 +30,6 @@ export class HomePage implements OnInit{
    console.log(this.username)
    console.log(this.password)
   }
-  async presentModal() {
-    const modal = await this.modalCtrl.create({
-      component: LoginPage,
-      componentProps: {
-        'username': 'Douglas',
-        'password': 'Adams',
-      }
-    });
-    return await modal.present();
-  }
 
   async presentAlert() {
     const alert = await this.alertCtrl.create({
@@ -52,12 +42,6 @@ export class HomePage implements OnInit{
     await alert.present();
   }
 
-  async presentModal3() {
-    const modal = await this.modalCtrl.create({
-      component: LoginPage
-    });
-    return await modal.present();
-  }
   getData(){
     const url = `https://api.bitbucket.org/2.0/repositories/${this.username}/${this.searchTerm}/commits/`
     console.log(this.searchTerm)
