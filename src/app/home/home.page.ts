@@ -13,7 +13,7 @@ import { map, tap } from 'rxjs/operators';
 })
 export class HomePage implements OnInit {
   searchTerm: string;
-  commits: any[];
+  commits = []
 
   repositorie$: Observable<any>;
 
@@ -34,9 +34,10 @@ export class HomePage implements OnInit {
 
   getCommits(repository: string) {
     this.bitbucketService.getCommits(repository).subscribe(commits =>
-      console.log(commits)
-      // this.commits = commits
-    );
+      commits.forEach(resp=> this.commits.push(resp))
+      // this.commits = commits    
+      );
+      console.log(this.commits)
   }
 
   onLogoutClicked() {
