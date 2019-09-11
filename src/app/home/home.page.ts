@@ -3,6 +3,8 @@ import { ModalController } from '@ionic/angular';
 import { BitbucketService } from '../bitbucket/bitbucket.service';
 import { Observable, from } from 'rxjs';
 import { NavController } from '@ionic/angular';
+import { map, tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-home',
@@ -27,17 +29,27 @@ export class HomePage implements OnInit {
   }
 
   getRepositories() {
-    this.repositorie$ = this.bitbucketService.getRepositories();
+    this.repositorie$ = this.bitbucketService.getRepositories()
   }
 
   getCommits(repository: string) {
-    return this.bitbucketService.getCommits(repository).subscribe(
-      commits => this.commits = commits
+    this.bitbucketService.getCommits(repository).subscribe(commits =>
+      console.log(commits)
+      // this.commits = commits
     );
   }
 
   onLogoutClicked() {
-    this.bitbucketService.logout()
+    this.bitbucketService.logout();
   }
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.getRepositories()
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+
 
 }

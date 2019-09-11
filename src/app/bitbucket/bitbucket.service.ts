@@ -64,7 +64,7 @@ export class BitbucketService {
   }
 
   getRepositories() {
-    const url = `https://api.bitbucket.org/2.0/repositories/${this.username}`;
+    const url = `https://api.bitbucket.org/2.0/repositories/${this.username}/?sort=-updated_on`;
 
     return this.http.get(url, this.createAuthorizationHeader()).pipe(
       map(
@@ -90,4 +90,5 @@ export class BitbucketService {
       }
     };
   }
+
 }

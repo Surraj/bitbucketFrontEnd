@@ -1,12 +1,15 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Commits <button (click)="onLogoutClicked()">Logout</button> 
+      Commits <button (click)="onLogoutClicked()">Logout</button>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-searchbar [(ngModel)]="searchTerm" debounce="50"></ion-searchbar>
 
   <ion-list>
@@ -14,18 +17,19 @@
       Repositories
     </ion-list-header>
 
-    <ion-item tappable *ngFor="let repository of (repositorie$ | async | search: searchTerm) as repositories" (click)="getCommits(repository.name)">
+    <ion-item tappable *ngFor="let repository of (repositorie$ | async | search: searchTerm) as repositories"
+      (click)="getCommits(repository.name)">
       <ion-label>{{ repository.name }}</ion-label>
     </ion-item>
   </ion-list>
 
-  
+
   <ion-card *ngFor="let commit of commits">
     <ion-card-header>
       <ion-card-subtitle>{{commit.repository.name}}</ion-card-subtitle>
       <ion-card-title>{{commit.author.raw}}</ion-card-title>
     </ion-card-header>
-  
+
     <ion-card-content>
       <h3>{{commit.date}}</h3>
       <p> Message: <strong>{{commit.message}}</strong></p>
