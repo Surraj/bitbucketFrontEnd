@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule), canActivate: [AuthGuard]},
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'home/:id', loadChildren: './commits/commits.module#CommitsPageModule', canActivate: [AuthGuard] },
 ]
 
 

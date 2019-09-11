@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{repositoryID}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-card *ngFor="let item of information[0]">
+    <ion-card-header>
+      <ion-card-title>{{item.message}}</ion-card-title>
+    </ion-card-header>
+  </ion-card> -->
+      <!-- <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h2>Date</h2>
+          </ion-col>
+          <ion-col>
+            <h2>Message</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+              <ion-datetime displayFormat="YYYY-MM-DD HH:mm" value="{{commit.date}}" readonly="true"></ion-datetime>
+          </ion-col>
+          <ion-col>
+            <h2><strong>{{commit.message}}</strong></h2>
+          </ion-col>
+        </ion-row>
+      </ion-grid> -->
+      <ion-card *ngFor="let commit of information" class="test">
+        <ion-card-header>
+          <ion-card-title>{{commit.author.raw}}</ion-card-title>
+          <ion-card-subtitle>{{commit.repository.name}}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <h3>{{commit.date}}</h3>
+          <p> Message: <strong>{{commit.message}}</strong></p>
+        </ion-card-content>
+      </ion-card>
+</ion-content>

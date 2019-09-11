@@ -5,6 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { ThrowStmt } from '@angular/compiler';
 import { BitbucketResponse } from './bitbucket.interface';
 import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router'
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class BitbucketService {
   private password: string;
   private username: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private navCtrl:NavController, private router:Router) { }
 
   login(email: string, password: string) {
     this.email = email;
@@ -59,7 +60,9 @@ export class BitbucketService {
     localStorage.clear();
     // navigate to login page
     //this.navCtrl.goRoot('login');
-    window.history.back();
+    // this.router.navigateByUrl('login')
+    this.navCtrl.navigateBack('login')
+    
 
   }
 
@@ -68,7 +71,7 @@ export class BitbucketService {
 
     return this.http.get(url, this.createAuthorizationHeader(refresh)).pipe(
       map(
-        (response: BitbucketResponse) => response.values
+        (response: BitbucketResponse) =>response.values
       )
     );
   }

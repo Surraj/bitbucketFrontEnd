@@ -28,19 +28,32 @@ export class LoginPage implements OnInit {
   ngOnInit() {
 
   }
-
-  toast(message: string) {
-    this.toastCtrl.create({
-      message,
+  async presentToastFail() {
+    const toast = await this.toastCtrl.create({
+      message: 'Login Attempt Failed. Incorrect Email or Password',
       duration: 3000,
-      position: 'top'
-    }).then(toast => toast.present());
+      color:'danger'
+    });
+    toast.present();
+  }
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Logging In',
+      duration: 1000
+    });
+    await loading.present();
+    await loading.onDidDismiss();
+
+    console.log('Loading dismissed!');
   }
 
+
+
   onLoginClicked() {
+    this.presentLoading()
     this.bitbucketService.login(this.email, this.password).subscribe(
       () => this.navCtrl.navigateRoot('/home'),
-      error => console.log("Failed")
+      error => this.presentToastFail()
     )
   }
 }
