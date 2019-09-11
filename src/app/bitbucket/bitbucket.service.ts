@@ -63,30 +63,31 @@ export class BitbucketService {
 
   }
 
-  getRepositories() {
+  getRepositories(refresh = false) {
     const url = `https://api.bitbucket.org/2.0/repositories/${this.username}/?sort=-updated_on`;
 
-    return this.http.get(url, this.createAuthorizationHeader()).pipe(
+    return this.http.get(url, this.createAuthorizationHeader(refresh)).pipe(
       map(
         (response: BitbucketResponse) => response.values
       )
     );
   }
 
-  getCommits(repository: string) {
+  getCommits(repository: string, refresh = false) {
     const url = `https://api.bitbucket.org/2.0/repositories/${this.username}/${repository}/commits/`;
 
-    return this.http.get(url, this.createAuthorizationHeader()).pipe(
+    return this.http.get(url, this.createAuthorizationHeader(refresh)).pipe(
       map(
         (response: BitbucketResponse) => response.values
       )
     )
   }
 
-  private createAuthorizationHeader() {
+  private createAuthorizationHeader(refresh = false) {
     return {
       headers: {
-        'Authorization': `Basic ${btoa(`${this.email}:${this.password}`)}`
+        'Authorization': `Basic ${btoa(`${this.email}:${this.password}`)}`,
+       ...((refresh) ? {'If-None-Match': ''} : {})
       }
     };
   }
