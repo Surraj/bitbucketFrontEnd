@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CredentialsService } from './credentials.service';
+import { BitbucketService } from './bitbucket.service';
 
-describe('CredentialsService', () => {
+describe('BitbucketService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CredentialsService = TestBed.get(CredentialsService);
+    const service: BitbucketService = TestBed.get(BitbucketService);
     expect(service).toBeTruthy();
   });
 });
