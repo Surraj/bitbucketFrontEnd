@@ -24,8 +24,12 @@ export class CommitsPage implements OnInit {
       this.information = resp.map(commits => commits);
     });
   }
-
-  test() {
-    console.log(this.information);
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.getCommits(this.repositoryID)
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
   }
 }

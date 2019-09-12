@@ -26,12 +26,15 @@
       <ion-label>{{ repository.name }}</ion-label>
     </ion-item> -->
     <ion-card *ngFor="let repository of (repositorie$ | async | search: searchTerm) as repositories"
-      [routerLink]="['/','home',repository.name]" class="border">
-      <div>
-        <ion-card-content>
-          <h6>{{ repository.name }}</h6>
+      [routerLink]="['/','home',repository.repository.full_name]" class="border" [style.borderColor]="repository.permission === 'write' ? 'orange': repository.permission === 'admin' ? 'green' : 'blue'">
+     
+        <ion-card-content class="ion-no-padding">
+          <ion-item lines="none">
+              <h6>{{ repository.repository.name }}</h6>
+              <ion-badge slot="end" [style.backgroundColor]="repository.permission === 'write' ? 'orange': repository.permission === 'admin' ? 'green' : 'blue'" >{{repository.permission}}</ion-badge>
+          </ion-item >
         </ion-card-content>
-      </div>
+      
     </ion-card>
 
   </ion-list>

@@ -67,17 +67,17 @@ export class BitbucketService {
   }
 
   getRepositories(refresh = false) {
-    const url = `https://api.bitbucket.org/2.0/repositories/${this.username}/?sort=-updated_on`;
+    const url = `https://api.bitbucket.org/2.0/user/permissions/repositories`;
 
     return this.http.get(url, this.createAuthorizationHeader(refresh)).pipe(
       map(
-        (response: BitbucketResponse) => response.values
+        (response: BitbucketResponse) => response.values,
       )
     );
   }
 
   getCommits(repository: string, refresh = false) {
-    const url = `https://api.bitbucket.org/2.0/repositories/${this.username}/${repository}/commits/`;
+    const url = `https://api.bitbucket.org/2.0/repositories/${repository}/commits/`;
 
     return this.http.get(url, this.createAuthorizationHeader(refresh)).pipe(
       map(

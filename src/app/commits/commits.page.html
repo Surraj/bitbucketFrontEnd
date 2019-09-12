@@ -11,12 +11,15 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <!-- <ion-card *ngFor="let item of information[0]">
     <ion-card-header>
       <ion-card-title>{{item.message}}</ion-card-title>
     </ion-card-header>
   </ion-card> -->
-      <!-- <ion-grid>
+  <!-- <ion-grid>
         <ion-row>
           <ion-col>
             <h2>Date</h2>
@@ -34,15 +37,16 @@
           </ion-col>
         </ion-row>
       </ion-grid> -->
-      <ion-card *ngFor="let commit of information" class="test">
-        <ion-card-header>
-          <ion-card-title>{{commit.author.raw}}</ion-card-title>
-          <ion-card-subtitle>{{commit.repository.name}}</ion-card-subtitle>
-        </ion-card-header>
+  <ion-card *ngFor="let commit of information" class="test">
+    <ion-card-header>
+      <ion-card-title>{{commit.author.raw}}</ion-card-title>
+      <ion-card-subtitle>{{commit.repository.name}}</ion-card-subtitle>
+    </ion-card-header>
 
-        <ion-card-content>
-          <h3>{{commit.date}}</h3>
-          <p> Message: <strong>{{commit.message}}</strong></p>
-        </ion-card-content>
-      </ion-card>
+    <ion-card-content>
+      <!-- <h4>{{commit.date}}</h4> -->
+      <ion-datetime class="padding-left" displayFormat="YYYY-MM-DD || HH:mm" value="{{commit.date}}" readonly="true"></ion-datetime>
+      <h3> Message: <strong>{{commit.message}}</strong></h3>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

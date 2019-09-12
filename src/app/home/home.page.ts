@@ -13,8 +13,6 @@ import { map, tap, timeout, catchError } from 'rxjs/operators';
 })
 export class HomePage implements OnInit {
   searchTerm: string;
-  commits = []
-
   repositorie$: Observable<any>;
 
   constructor(
@@ -38,4 +36,5 @@ export class HomePage implements OnInit {
   onLogoutClicked() {
     this.bitbucketService.logout();
   }
+
 }

@@ -8,6 +8,9 @@ div:hover{
 }
 
 .border{
-    border-left: 5px solid #3880ff
+    border-left: 5px solid;
+    &:hover{
+        border-width: 10px;
+    }
 }
 
