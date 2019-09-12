@@ -35,13 +35,6 @@ export class HomePage implements OnInit {
       catchError(_ => event && event.target.complete())
     )
   }
-
-  getCommits(repository: string) {
-    this.bitbucketService.getCommits(repository).subscribe(commits =>
-      this.commits = commits    
-    );
-  }
-
   onLogoutClicked() {
     this.bitbucketService.logout();
   }

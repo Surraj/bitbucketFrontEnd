@@ -5,7 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { ThrowStmt } from '@angular/compiler';
 import { BitbucketResponse } from './bitbucket.interface';
 import { NavController } from '@ionic/angular';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class BitbucketService {
   private password: string;
   private username: string;
 
-  constructor(private http: HttpClient, private navCtrl:NavController, private router:Router) { }
+  constructor(private http: HttpClient, private navCtrl: NavController, private router: Router) { }
 
   login(email: string, password: string) {
     this.email = email;
@@ -26,11 +26,11 @@ export class BitbucketService {
     return this.http.get(url, this.createAuthorizationHeader()).pipe(
       map((response: {username: string}) => response.username),
       tap(username => {
-        this.username = username
+        this.username = username;
 
-        localStorage.setItem("email", email);
-        localStorage.setItem("password", password);
-        localStorage.setItem("username", username);
+        localStorage.setItem('email', email);
+        localStorage.setItem('password', password);
+        localStorage.setItem('username', username);
       }),
     );
   }
@@ -39,9 +39,9 @@ export class BitbucketService {
     if (this.email && this.password && this.username) {
       return true;
     } else {
-      this.email = localStorage.getItem("email");
-      this.password = localStorage.getItem("password");
-      this.username = localStorage.getItem("username");
+      this.email = localStorage.getItem('email');
+      this.password = localStorage.getItem('password');
+      this.username = localStorage.getItem('username');
 
       if (this.email && this.password && this.username) {
         return true;
@@ -59,10 +59,10 @@ export class BitbucketService {
     // Clear the local storage
     localStorage.clear();
     // navigate to login page
-    //this.navCtrl.goRoot('login');
+    // this.navCtrl.goRoot('login');
     // this.router.navigateByUrl('login')
-    this.navCtrl.navigateBack('login')
-    
+    this.navCtrl.navigateBack('login');
+
 
   }
 
@@ -71,7 +71,7 @@ export class BitbucketService {
 
     return this.http.get(url, this.createAuthorizationHeader(refresh)).pipe(
       map(
-        (response: BitbucketResponse) =>response.values
+        (response: BitbucketResponse) => response.values
       )
     );
   }
@@ -83,14 +83,15 @@ export class BitbucketService {
       map(
         (response: BitbucketResponse) => response.values
       )
-    )
+    );
   }
 
   private createAuthorizationHeader(refresh = false) {
     return {
       headers: {
-        'Authorization': `Basic ${btoa(`${this.email}:${this.password}`)}`,
-       ...((refresh) ? {'If-None-Match': ''} : {})
+        Authorization: `Basic ${btoa(`${this.email}:${this.password}`)}`,
+        ...((refresh) ? {'If-None-Match': ''} : {}),
+        'Content-Type': 'application/x-www-url-form-encoded',
       }
     };
   }
