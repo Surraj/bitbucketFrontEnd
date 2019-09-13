@@ -67,7 +67,7 @@ export class BitbucketService {
   }
 
   getRepositories(refresh = false) {
-    const url = `https://api.bitbucket.org/2.0/user/permissions/repositories`;
+    const url = `https://api.bitbucket.org/2.0/user/permissions/repositories?pagelen=100`;
 
     return this.http.get(url, this.createAuthorizationHeader(refresh)).pipe(
       map(

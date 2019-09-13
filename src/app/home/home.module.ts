@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 import { SearchPipe } from './search.pipe';
+import { ReversePipe } from './reverse.pipe';
 
 
 @NgModule({
@@ -20,6 +21,6 @@ import { SearchPipe } from './search.pipe';
     ])
   ],
   providers: [],
-  declarations: [HomePage, SearchPipe]
+  declarations: [HomePage, SearchPipe, ReversePipe]
 })
 export class HomePageModule {}
